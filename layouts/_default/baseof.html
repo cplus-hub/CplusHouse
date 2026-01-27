@@ -9,8 +9,11 @@
 <body>
     <header>
         <nav>
-            <a href="{{ "/" | relURL }}" class="logo">{{ .Site.Title }}</a>
-            <button id="theme-toggle" aria-label="切換主題">🌙</button>
+            <a href="{{ "" | relURL }}" class="logo">{{ .Site.Title }}</a>
+            <div class="nav-right">
+                <a href="{{ "blog" | relURL }}" class="nav-link">部落格</a>
+                <button id="theme-toggle" aria-label="切換主題">🌙</button>
+            </div>
         </nav>
     </header>
 

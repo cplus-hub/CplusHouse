@@ -45,6 +45,24 @@ header {
     margin-bottom: 2rem;
 }
 
+/* 導覽列右側區塊 */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
 header nav {
     display: flex;
     justify-content: space-between;
@@ -320,3 +338,52 @@ footer {
     background-color: var(--secondary);
     transform: translateY(-3px); /* 懸停時輕微上浮 */
 }
+
+/* 部落格列表樣式 */
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+}
+
+.blog-summary {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--text-main);
+}
+
+.blog-summary h2 { margin-top: 0; }
+.blog-summary h2 a { text-decoration: none; color: var(--text-main); }
+.blog-summary h2 a:hover { color: var(--primary); }
+
+.post-meta-list {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 文章內頁樣式 */
+.post-header {
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 2rem;
+}
+
+.post-meta { color: var(--text-muted); font-size: 0.9rem; }
+
+.post-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); }
+.post-content h2 { margin-top: 2rem; color: var(--text-main); }
+.post-content p { margin-bottom: 1.5rem; }

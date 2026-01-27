@@ -1,6 +1,6 @@
 baseURL = 'https://cplus-hub.github.io/CplusHouse' # 請換成您未來的真實網址
 languageCode = 'zh-tw'
-title = '我的個人作品集'
+title = 'CPlus House'
 theme = [] # 暫時使用自定義 Layout，不依賴外部主題
 
 [params]
@@ -31,7 +31,7 @@ theme = [] # 暫時使用自定義 Layout，不依賴外部主題
     image = "/images/project2.jpg" # 改為本地路徑
     link = "#"
   [[params.projects]]
-    title = "客製化購物網站"
-    description = "使用PHP 構建的靜態網站主題，支援金流與第三方登入。"
+    title = "客製化購課平台"
+    description = "使用PHP 構建的動態網站主題，支援金流與第三方登入。"
     image = "/images/project3.jpg" # 改為本地路徑
     link = "#"
