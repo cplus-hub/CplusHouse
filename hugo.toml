@@ -1,0 +1,37 @@
+baseURL = 'https://cplus-hub.github.io/CplusHouse' # 請換成您未來的真實網址
+languageCode = 'zh-tw'
+title = '我的個人作品集'
+theme = [] # 暫時使用自定義 Layout，不依賴外部主題
+
+[params]
+  author = "CPlus"
+  bio = "隨興開發些玩意。"
+  github = "https://github.com/cplus-hub" # 範例：請換成您自己的 GitHub 個人檔案網址
+  email = "mailto:welcome3345@gmail.com" # 範例：請換成您自己的 Email
+
+  # 技能列表 (模擬 README 中的 Skills 區塊)
+  [[params.skills]]
+    name = "PHP"
+  [[params.skills]]
+    name = "jQuery"
+  [[params.skills]]
+    name = "Java"
+  [[params.skills]]
+    name = "C"
+
+  # 作品集列表 (Projects)
+  [[params.projects]]
+    title = "Care 關心"
+    description = "上百家補習班共同使用，使用PHP 客製化框架進行開發，串接多方金流與第三方服務。"
+    image = "/images/care.png"
+    link = "#"
+  [[params.projects]]
+    title = "社區管理專案"
+    description = "搭配Cursor 與PHP 進行協同開發合作，提升團隊開發效率。"
+    image = "/images/project2.jpg" # 改為本地路徑
+    link = "#"
+  [[params.projects]]
+    title = "客製化購物網站"
+    description = "使用PHP 構建的靜態網站主題，支援金流與第三方登入。"
+    image = "/images/project3.jpg" # 改為本地路徑
+    link = "#"

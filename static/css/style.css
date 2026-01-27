@@ -1,0 +1,322 @@
+/* 現代簡約風格 (Modern Minimalist) */
+:root {
+    --primary: #2563eb;       /* 亮藍色 */
+    --secondary: #1e40af;     /* 深藍色 */
+    --bg-color: #f3f4f6;      /* 淺灰背景 */
+    --card-bg: #ffffff;       /* 卡片白底 */
+    --text-main: #1f2937;     /* 深灰文字 */
+    --text-muted: #6b7280;    /* 次要文字 */
+    --header-bg: #1f2937;     /* Header 背景 (獨立變數，保持深色) */
+    --card-border: transparent; /* 卡片邊框 (預設透明) */
+    --tag-bg: #eff6ff;        /* 技能標籤背景 */
+}
+
+/* 暗黑模式變數 */
+body.dark-mode {
+    --primary: #38bdf8;       /* 更清爽的青藍色 (Sky 400) */
+    --secondary: #0ea5e9;
+    --bg-color: #0f172a;      /* 深邃藍黑背景 (Slate 900) - 更有質感 */
+    --card-bg: #1e293b;       /* 深灰藍卡片 (Slate 800) */
+    --text-main: #f8fafc;     /* 極淺灰文字 (Slate 50) */
+    --text-muted: #94a3b8;    /* 柔和灰 (Slate 400) */
+    --header-bg: #1e293b;     /* 暗黑模式 Header 與卡片同色，避免過亮 */
+    --card-border: #334155;   /* 增加微弱邊框 (Slate 700)，提升層次感 */
+    --tag-bg: #334155;        /* 深色模式下的標籤背景 */
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin: 0;
+    background-color: var(--bg-color);
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+header {
+    background: var(--header-bg); /* 修正：使用獨立的 Header 背景變數 */
+    color: white;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 個人簡介卡片 */
+.profile {
+    background: var(--card-bg);
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    border: 1px solid var(--card-border); /* 增加邊框 */
+}
+
+.profile h1 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-main);
+    font-size: 2.5rem;
+}
+
+.bio {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 按鈕樣式 */
+.social-links a {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px; /* 膠囊狀 */
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.social-links a:hover {
+    background-color: var(--secondary);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* 內容區塊 */
+.content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    border: 1px solid var(--card-border); /* 增加邊框 */
+}
+
+/* 技能標籤 */
+.skills {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--text-main);
+    border: 1px solid var(--card-border); /* 增加邊框 */
+}
+
+.skills h2 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-list li {
+    background-color: var(--tag-bg); /* 使用變數以適應暗黑模式 */
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* 作品集區塊樣式 */
+.projects {
+    margin-bottom: 2rem;
+}
+
+.projects h2 {
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+/* 卡片輪播容器 (CSS Scroll Snap) */
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    /* 隱藏捲軸但保留功能 */
+    scrollbar-width: thin;
+}
+
+.project-card {
+    flex: 0 0 300px; /* 固定卡片寬度 */
+    height: 200px;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    scroll-snap-align: start;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border); /* 增加邊框 */
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 預設顯示的標題條 */
+.project-title-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* 懸停時顯示的詳細內容遮罩 */
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(31, 41, 55, 0.95); /* 深色半透明背景 */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    text-align: center;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-link {
+    margin-top: 1rem;
+    color: white;
+    border: 1px solid white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.project-link:hover {
+    background: white;
+    color: black;
+}
+
+/* 響應式設計 (RWD) - 當螢幕寬度小於 768px (平板與手機) */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+
+    header nav {
+        padding: 0 15px;
+    }
+
+    .profile {
+        padding: 2rem 1.5rem;
+    }
+
+    .profile h1 {
+        font-size: 2rem; /* 縮小標題字體 */
+    }
+
+    /* 將社群連結按鈕改為垂直堆疊，方便點擊 */
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .social-links a {
+        width: 80%; /* 讓按鈕有足夠寬度 */
+        text-align: center;
+        margin: 0;
+    }
+
+    .project-card {
+        /* 讓輪播卡片寬度約為螢幕的 80%，滑動體驗更佳 */
+        flex-basis: 80%;
+    }
+}
+
+/* 回到頂部按鈕樣式 */
+#back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    opacity: 0; /* 預設隱藏 */
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    background-color: var(--secondary);
+    transform: translateY(-3px); /* 懸停時輕微上浮 */
+}

@@ -1,0 +1,53 @@
+{{ define "main" }}
+<div class="container">
+    <!-- 個人簡介區塊 -->
+    <section class="profile">
+        <h1>你好，我是 {{ .Site.Params.author }}</h1>
+        <p class="bio">{{ .Site.Params.bio }}</p>
+        
+        <div class="social-links">
+            {{ with .Site.Params.github }}<a href="{{ . }}">GitHub</a>{{ end }}
+            {{ with .Site.Params.email }}<a href="{{ . }}">Email</a>{{ end }}
+        </div>
+    </section>
+
+    <!-- 主要內容區塊 (來自 content/_index.md) -->
+    <section class="content">
+        {{ .Content }}
+    </section>
+
+    <!-- 作品集區塊 (卡片輪播) -->
+    {{ if .Site.Params.projects }}
+    <section class="projects">
+        <h2>精選作品</h2>
+        <div class="carousel-container">
+            {{ range .Site.Params.projects }}
+            <div class="project-card">
+                <img src="{{ .image }}" alt="{{ .title }}" class="project-img">
+                <div class="project-title-bar">{{ .title }}</div>
+                <div class="project-overlay">
+                    <h3>{{ .title }}</h3>
+                    <p>{{ .description }}</p>
+                    <a href="{{ .link }}" class="project-link">查看詳情</a>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- 技能區塊 -->
+    {{ if .Site.Params.skills }}
+    <section class="skills">
+        <h2>技術能力</h2>
+        <ul class="skill-list">
+            {{ range .Site.Params.skills }}
+            <li>{{ .name }}</li>
+            {{ end }}
+        </ul>
+    </section>
+    {{ end }}
+
+    <!-- 這裡未來可以加入最新文章列表 -->
+</div>
+{{ end }}
