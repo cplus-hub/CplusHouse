@@ -1,61 +1,97 @@
-# 個人網站專案規劃
+# 個人作品集網站 (Personal Portfolio Website)
 
-本專案旨在建立一個託管於 GitHub Pages 的個人網站，整合作品集、個人資訊與部落格功能。
+這是一個基於 **Hugo** 靜態網站生成器構建的個人作品集網站。專案採用類似 MVC 的架構設計，並整合了現代化的前端功能，旨在提供一個高效、易維護且美觀的個人展示平台。
 
-## 專案需求規格
+## ✨ 功能特色
 
-根據需求定義，本專案將遵循以下規範進行開發：
+*   **現代簡約風格**：採用乾淨的卡片式設計與配色。
+*   **暗黑模式 (Dark Mode)**：支援一鍵切換日/夜間模式，並自動記憶使用者偏好。
+*   **響應式設計 (RWD)**：完美支援手機、平板與桌機瀏覽。
+*   **作品集輪播**：首頁包含互動式的作品集展示區塊，支援觸控滑動。
+*   **MVC 架構思維**：
+    *   **Model**: `content/` (Markdown 資料) & `hugo.toml` (設定)
+    *   **View**: `layouts/` (HTML 模板)
+    *   **Controller**: Hugo 核心引擎
+*   **自動化部署**：整合 GitHub Actions，Push 即自動發布至 GitHub Pages。
 
-1.  **技術架構 (Framework)**
-    *   專案必須使用框架進行建置（例如：Hexo, Hugo, Jekyll 或 Vue/React 相關靜態生成器），以確保程式碼結構化與可維護性。
+## 📂 專案結構
 
-2.  **網站用途**
-    *   **作品呈現**: 展示過往專案、程式碼與設計成果。
-    *   **個人資訊**: 包含自我介紹、技能樹與聯絡方式。
-    *   **部落格**: 用於發表技術文章或生活紀錄。
+本專案遵循 Hugo 標準目錄結構，並對應 MVC 邏輯：
 
-3.  **部署平台**
-    *   網站成品須部署至 **GitHub Pages**。
+```text
+CplusHouse/
+├── content/                # [Model] 網站內容 (Markdown)
+│   └── _index.md           # 首頁文字內容
+├── layouts/                # [View] HTML 模板
+│   ├── _default/
+│   │   └── baseof.html     # 基礎佈局 (Header, Footer)
+│   └── index.html          # 首頁專用模板
+├── static/                 # [Assets] 靜態資源
+│   ├── css/
+│   │   └── style.css       # 全站樣式表
+│   └── images/             # 圖片檔案
+├── .github/
+│   └── workflows/
+│       └── hugo.yaml       # GitHub Actions 自動部署腳本
+└── hugo.toml               # [Config] 網站核心設定
+```
 
-4.  **語言規範**
-    *   全站內容與介面須完全使用 **繁體中文**。
+## 🚀 快速開始
 
-## 技術架構選型
+### 前置需求
+請確保您的電腦已安裝 Hugo (建議安裝 Extended 版本)。
 
-本專案已確定採用 **Hugo** (Go語言開發的靜態網站生成器) 進行開發。
-
-### 選擇原因
-1.  **高維護性**：單一執行檔，無複雜依賴環境，避免長期閒置後無法運作的問題。
-2.  **高效能**：頁面生成速度極快。
-3.  **結構清晰**：內容 (Markdown) 與版型 (Layouts) 分離。
-
-## 專案結構說明
-
-*   `hugo.toml`: 網站核心設定檔。
-*   `content/`: 存放網站內容 (Markdown)。
-    *   `_index.md`: 首頁內容。
-*   `layouts/`: 存放 HTML 模板。
-    *   `index.html`: 首頁 HTML 結構。
-
-## 開發指令
-
-1.  安裝 Hugo (請參考官方文件)。
-2.  啟動本地伺服器：
+### 本地開發
+1.  **啟動伺服器**
     ```bash
     hugo server
     ```
-3.  瀏覽網站：開啟瀏覽器訪問 `http://localhost:1313`
 
-## 部署至 GitHub Pages
+2.  **預覽網站**
+    打開瀏覽器訪問 `http://localhost:1313`。
 
-本專案已設定 GitHub Actions 自動化部署，請依照以下步驟啟用：
+## ⚙️ 網站設定
 
-1.  **修改設定檔**：
-    *   開啟 `hugo.toml`，將 `baseURL` 修改為您實際的 GitHub Pages 網址（例如：`https://您的帳號.github.io/專案名稱/`）。
-2.  **上傳程式碼**：
-    *   將專案 Push 到 GitHub Repository 的 `main` 分支。
-3.  **啟用 Pages**：
-    *   進入 GitHub Repo 的 **Settings** > **Pages**。
-    *   在 **Build and deployment** 區塊，將 Source 改為 **GitHub Actions**。
-4.  **完成**：
-    *   等待 Actions 執行完畢（約 1 分鐘），您的網站就會上線了。
+所有個人資訊與作品資料皆可在 `hugo.toml` 中進行設定，無需修改 HTML。
+
+### 修改個人資訊
+```toml
+[params]
+  author = "您的名字"
+  bio = "您的個人簡介..."
+  github = "https://github.com/..."
+  email = "mailto:..."
+```
+
+### 新增作品
+在 `hugo.toml` 的 `[[params.projects]]` 區塊中新增：
+```toml
+[[params.projects]]
+  title = "專案名稱"
+  description = "專案描述"
+  image = "/images/your-image.jpg" # 請將圖片放入 static/images/
+  link = "專案連結"
+```
+
+## 📦 部署至 GitHub Pages
+
+本專案已設定好 GitHub Actions，部署流程完全自動化。
+
+1.  **修改 `hugo.toml`**：
+    將 `baseURL` 修改為您 GitHub Pages 的網址：
+    ```toml
+    baseURL = 'https://您的帳號.github.io/專案名稱/'
+    ```
+
+2.  **推送到 GitHub**：
+    ```bash
+    git add .
+    git commit -m "Update site content"
+    git push origin main
+    ```
+
+3.  **設定 GitHub Pages**：
+    *   進入 GitHub Repository 的 **Settings** > **Pages**。
+    *   在 **Build and deployment** > **Source** 選擇 **GitHub Actions**。
+
+等待約 1 分鐘，您的網站就會自動上線！
