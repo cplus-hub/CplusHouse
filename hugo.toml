@@ -23,7 +23,7 @@ theme = [] # 暫時使用自定義 Layout，不依賴外部主題
   [[params.projects]]
     title = "Care 關心"
     description = "上百家補習班共同使用，使用PHP 客製化框架進行開發，串接多方金流與第三方服務。"
-    image = "/images/care.png"
+    image = "images/care.png"
     link = "#"
   [[params.projects]]
     title = "社區管理專案"
