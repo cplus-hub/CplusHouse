@@ -4,21 +4,44 @@
         <header class="post-header">
             <h1>{{ .Title }}</h1>
             <div class="post-meta">
-                <time>{{ .Date.Format "2006-01-02" }}</time>
-                {{ if .Params.author }}<span> | 作者: {{ .Params.author }}</span>{{ end }}
-                <!-- 顯示標籤 -->
-                {{ if .Params.tags }}
-                <span class="tags-container">
-                    {{ range .Params.tags }}
-                    <span class="tag">#{{ . }}</span>
+                <div class="meta-item">
+                    <time>{{ .Date.Format "2006-01-02" }}</time>
+                    {{ if .Params.author }}<span>・作者: {{ .Params.author }}</span>{{ end }}
+                </div>
+                <div class="meta-item">
+                    <!-- 顯示標籤 -->
+                    {{ if .Params.tags }}
+                        {{ range .Params.tags }}
+                        <a href="{{ printf "tags/%s" (. | urlize) | relURL }}" class="tag">#{{ . }}</a>
+                        {{ end }}
                     {{ end }}
-                </span>
-                {{ end }}
+                </div>
             </div>
         </header>
         <div class="post-content">
             {{ .Content }}
         </div>
+        <!-- 上一篇/下一篇文章導覽 -->
+        <nav class="post-nav">
+            {{ with .PrevInSection }}
+            <a class="post-nav-item post-nav-prev" href="{{ .RelPermalink }}">
+                <span class="nav-arrow">←</span>
+                <div>
+                    <span class="nav-label">上一篇</span>
+                    <span class="nav-title">{{ .Title }}</span>
+                </div>
+            </a>
+            {{ end }}
+            {{ with .NextInSection }}
+            <a class="post-nav-item post-nav-next" href="{{ .RelPermalink }}">
+                <div>
+                    <span class="nav-label">下一篇</span>
+                    <span class="nav-title">{{ .Title }}</span>
+                </div>
+                <span class="nav-arrow">→</span>
+            </a>
+            {{ end }}
+        </nav>
     </article>
 </div>
 {{ end }}
