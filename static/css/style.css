@@ -387,3 +387,13 @@ footer {
 .post-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-main); }
 .post-content h2 { margin-top: 2rem; color: var(--text-main); }
 .post-content p { margin-bottom: 1.5rem; }
+
+/* 文章內圖片的統一格式 */
+.post-content img {
+    max-width: 100%;      /* 響應式關鍵：圖片寬度不超過容器 */
+    height: auto;         /* 保持圖片原始長寬比，避免變形 */
+    display: block;       /* 讓 margin: auto 生效，實現置中 */
+    margin: 2rem auto;    /* 設定圖片的上下間距，並使其水平置中 */
+    border-radius: 0.75rem; /* 加上圓角，與網站整體風格更搭 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 加上細微陰影提升質感 */
+}
