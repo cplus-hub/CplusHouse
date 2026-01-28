@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="container">
+    <h1 class="page-title">{{ .Title }}</h1>
+    <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="輸入關鍵字搜尋文章..." autocomplete="off">
+        <div id="search-results" class="blog-list"></div>
+    </div>
+</div>
+<script src="{{ "js/search.js" | relURL }}"></script>
+{{ end }}

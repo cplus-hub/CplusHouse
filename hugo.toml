@@ -3,6 +3,13 @@ languageCode = 'zh-tw'
 title = 'CPlus House'
 theme = [] # 暫時使用自定義 Layout，不依賴外部主題
 
+[pagination]
+  pagerSize = 10 # 設定每頁顯示 5 篇文章
+
+[outputs]
+  # 讓首頁除了生成 HTML 外，也生成 JSON (供搜尋使用)
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   author = "CPlus"
   bio = "隨興開發些玩意。"

@@ -1,17 +1,46 @@
 {{ define "main" }}
 <div class="container">
     <h1 class="page-title">{{ .Title }}</h1>
-    <div class="blog-list">
-        {{ range .Pages }}
-        <article class="blog-summary">
-            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-            <div class="post-meta-list">
-                <time>{{ .Date.Format "2006-01-02" }}</time>
-            </div>
-            <p>{{ .Summary }}</p>
-            <a href="{{ .RelPermalink }}" class="read-more">閱讀更多 →</a>
-        </article>
+    
+    <!-- 搜尋區塊 -->
+    <div class="search-wrapper">
+        <input type="text" id="search-input" data-search-index="{{ "index.json" | relURL }}" placeholder="輸入關鍵字搜尋文章..." autocomplete="off">
+    </div>
+    <div id="search-results" class="blog-list" style="display: none;"></div>
+
+    <!-- 預設文章列表 (搜尋時隱藏) -->
+    <div id="default-list">
+        <div class="blog-list">
+            <!-- 使用 Paginator 進行分頁 -->
+            {{ range .Paginator.Pages }}
+            <article class="blog-summary">
+                <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                <div class="post-meta-list">
+                    <time>{{ .Date.Format "2006-01-02" }}</time>
+                    <!-- 顯示標籤 -->
+                    {{ if .Params.tags }}
+                    <span class="tags">
+                        {{ range .Params.tags }}
+                        <span class="tag">#{{ . }}</span>
+                        {{ end }}
+                    </span>
+                    {{ end }}
+                </div>
+                <p>{{ .Summary }}</p>
+                <a href="{{ .RelPermalink }}" class="read-more">閱讀更多 →</a>
+            </article>
+            {{ end }}
+        </div>
+
+        <!-- 分頁導覽列 -->
+        {{ if gt .Paginator.TotalPages 1 }}
+        <ul class="pagination">
+            {{ if .Paginator.HasPrev }}<li><a href="{{ .Paginator.Prev.URL }}">上一頁</a></li>{{ end }}
+            <li><span>第 {{ .Paginator.PageNumber }} 頁 / 共 {{ .Paginator.TotalPages }} 頁</span></li>
+            {{ if .Paginator.HasNext }}<li><a href="{{ .Paginator.Next.URL }}">下一頁</a></li>{{ end }}
+        </ul>
         {{ end }}
     </div>
 </div>
+<script src="{{ "js/search.js" | relURL }}"></script>
 {{ end }}
