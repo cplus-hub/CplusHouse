@@ -36,18 +36,19 @@
     </section>
     {{ end }}
 
-    <!-- 技能區塊 -->
-    {{ if .Site.Params.skills }}
-    <section class="skills">
-        <h2>技術能力</h2>
-        <ul class="skill-list">
-            {{ range .Site.Params.skills }}
-            <li>{{ .name }}</li>
+    <!-- 最新文章區塊 -->
+    <section class="recent-posts">
+        <h2>最新文章</h2>
+        <ul class="recent-posts-list">
+            {{ range first 5 (where .Site.RegularPages "Section" "blog") }}
+            <li class="recent-post-item">
+                <a href="{{ .RelPermalink }}">
+                    <span class="recent-post-title">{{ .Title }}</span>
+                    <time class="recent-post-date">{{ .Date.Format "2006-01-02" }}</time>
+                </a>
+            </li>
             {{ end }}
         </ul>
     </section>
-    {{ end }}
-
-    <!-- 這裡未來可以加入最新文章列表 -->
 </div>
 {{ end }}

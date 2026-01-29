@@ -2,7 +2,7 @@
     <div class="sidebar-widget">
         <h3 class="widget-title">熱門標籤</h3>
         <div class="tag-cloud">
-            {{ $tags := .Site.Taxonomies.tags.ByCount }}
+            {{ $tags := site.Taxonomies.tags.ByCount }}
             {{ range $tags }}
             <a href="{{ .Page.RelPermalink }}" class="tag-cloud-item">
                 {{ .Page.Title }}
@@ -11,5 +11,16 @@
             {{ end }}
         </div>
     </div>
-    <!-- 未來可以在此處增加其他側邊欄小工具，例如「最新文章」 -->
+
+    <!-- 技能區塊 -->
+    {{ if site.Params.skills }}
+    <div class="sidebar-widget">
+        <h3 class="widget-title">技術能力</h3>
+        <ul class="skill-list">
+            {{ range site.Params.skills }}
+            <li>{{ .name }}</li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
 </aside>
