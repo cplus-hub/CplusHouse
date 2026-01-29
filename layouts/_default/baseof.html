@@ -25,5 +25,38 @@
 
     <button id="back-to-top" title="Go to top">↑</button>
     {{ block "scripts" . }}{{ end }}
+    <script>
+        // Back to top button logic
+        const backToTopButton = document.getElementById('back-to-top');
+        if (backToTopButton) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 200) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Theme toggle logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                if (themeToggle) themeToggle.innerHTML = '🌙';
+            } else {
+                body.classList.remove('dark-mode');
+                if (themeToggle) themeToggle.innerHTML = '☀️';
+            }
+        };
+
+        if (themeToggle) themeToggle.addEventListener('click', () => { const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark'; applyTheme(newTheme); localStorage.setItem('theme', newTheme); });
+        document.addEventListener('DOMContentLoaded', () => { const savedTheme = localStorage.getItem('theme'); if (savedTheme) { applyTheme(savedTheme); } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { applyTheme('dark'); } });
+    </script>
 </body>
 </html>
