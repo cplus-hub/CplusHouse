@@ -32,11 +32,29 @@ body {
     background-color: var(--bg-color);
 }
 
-.container {
-    max-width: 800px;
-    margin: 40px auto;
+/* 全局佈局容器 */
+.site-wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* 側邊欄固定寬度，主內容自適應 */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0 20px;
 }
+
+.content-wrapper {
+    min-width: 0; /* 防止在 Grid 佈局中內容溢出 */
+}
+
+.container {
+    max-width: 800px;
+    /* margin: 40px auto; -> 由 site-wrapper 控制 */
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+/* 在新佈局中，位於 content-wrapper 內的 container 不再需要左右 padding */
+.content-wrapper .container { padding: 0; }
 
 header {
     background: var(--header-bg); /* 修正：使用獨立的 Header 背景變數 */
@@ -67,7 +85,7 @@ header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 800px;
+    max-width: 1200px; /* 與 site-wrapper 對齊 */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -306,6 +324,18 @@ footer {
     .project-card {
         /* 讓輪播卡片寬度約為螢幕的 80%，滑動體驗更佳 */
         flex-basis: 80%;
+    }
+}
+/* 響應式佈局：當螢幕寬度小於 1024px 時，側邊欄移至主內容下方 */
+@media (max-width: 1024px) {
+    .site-wrapper {
+        grid-template-columns: 1fr; /* 改為單欄堆疊 */
+    }
+    .sidebar {
+        order: 2; /* 將側邊欄的順序設為 2 */
+    }
+    .content-wrapper {
+        order: 1; /* 主內容順序為 1，顯示在上方 */
     }
 }
 
@@ -550,3 +580,64 @@ body.dark-mode .post-content .highlight {
     overflow: hidden;
 }
 .nav-arrow { font-size: 1.5rem; color: var(--primary); flex-shrink: 0; }
+
+/* 側邊欄樣式 */
+.sidebar-widget {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-top: 40px;
+    position: sticky; /* 讓側邊欄在滾動時固定 */
+    top: 2rem;
+}
+
+.widget-title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.75rem;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tag-cloud-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--tag-bg);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.tag-cloud-item:hover {
+    background-color: var(--primary);
+    color: var(--card-bg);
+    transform: translateY(-2px);
+}
+
+.tag-cloud-count {
+    background-color: rgba(0,0,0,0.07);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 99px;
+    font-weight: 500;
+}
+
+.tag-cloud-item:hover .tag-cloud-count {
+    background-color: rgba(255,255,255,0.2);
+    color: var(--card-bg);
+}
