@@ -1,69 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.LanguageCode | default "zh-tw" }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    {{/*  您可以將 favicon.ico 放在 static/ 資料夾下  */}}
+    {{ if fileExists "static/favicon.ico" }}
+    <link rel="icon" href="{{ "favicon.ico" | relURL }}">
+    {{ end }}
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="{{ "" | relURL }}" class="logo">{{ .Site.Title }}</a>
-            <div class="nav-right">
-                <a href="{{ "blog" | relURL }}" class="nav-link">部落格</a>
-                <button id="theme-toggle" aria-label="切換主題">🌙</button>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        {{ block "main" . }}{{ end }}
-    </main>
+    {{ partial "header.html" . }}
 
-    <footer>
-        <p>&copy; {{ now.Year }} {{ .Site.Params.author }}. Powered by Hugo.</p>
-    </footer>
+    <div class="site-wrapper">
+        {{ partial "sidebar.html" . }}
+        <div class="content-wrapper">
+            {{ block "main" . }}{{ end }}
+        </div>
+    </div>
 
-    <!-- 回到頂部按鈕 -->
-    <button id="back-to-top" aria-label="回到頂部">↑</button>
+    {{ partial "footer.html" . }}
 
-    <script>
-        // 暗黑模式切換邏輯
-        const toggleBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-        
-        // 檢查本地儲存或系統偏好
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme === 'dark' || (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            body.classList.add('dark-mode');
-            toggleBtn.textContent = '☀️';
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const isDark = body.classList.contains('dark-mode');
-            toggleBtn.textContent = isDark ? '☀️' : '🌙';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-
-        // 回到頂部按鈕邏輯
-        const backToTopBtn = document.getElementById('back-to-top');
-
-        // 監聽捲動事件
-        window.addEventListener('scroll', () => {
-            // 當捲動超過 300px 時顯示按鈕
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-
-        // 點擊回到頂部
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
+    <button id="back-to-top" title="Go to top">↑</button>
+    {{ block "scripts" . }}{{ end }}
 </body>
 </html>

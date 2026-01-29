@@ -1,97 +1,70 @@
-# 個人作品集網站 (Personal Portfolio Website)
+# CPlus House
 
-這是一個基於 **Hugo** 靜態網站生成器構建的個人作品集網站。專案採用類似 MVC 的架構設計，並整合了現代化的前端功能，旨在提供一個高效、易維護且美觀的個人展示平台。
+這是一個使用 [Hugo](https://gohugo.io/) 建立的現代化個人作品集與部落格網站。
 
-## ✨ 功能特色
+**線上預覽:** [https://cplus-hub.github.io/CplusHouse](https://cplus-hub.github.io/CplusHouse)
 
-*   **現代簡約風格**：採用乾淨的卡片式設計與配色。
-*   **暗黑模式 (Dark Mode)**：支援一鍵切換日/夜間模式，並自動記憶使用者偏好。
-*   **響應式設計 (RWD)**：完美支援手機、平板與桌機瀏覽。
-*   **作品集輪播**：首頁包含互動式的作品集展示區塊，支援觸控滑動。
-*   **MVC 架構思維**：
-    *   **Model**: `content/` (Markdown 資料) & `hugo.toml` (設定)
-    *   **View**: `layouts/` (HTML 模板)
-    *   **Controller**: Hugo 核心引擎
-*   **自動化部署**：整合 GitHub Actions，Push 即自動發布至 GitHub Pages。
+---
 
-## 📂 專案結構
+## ✨ 主要功能 (Features)
 
-本專案遵循 Hugo 標準目錄結構，並對應 MVC 邏輯：
+這個專案整合了多項現代網站功能，提供流暢的使用者體驗。
 
-```text
-CplusHouse/
-├── content/                # [Model] 網站內容 (Markdown)
-│   └── _index.md           # 首頁文字內容
-├── layouts/                # [View] HTML 模板
-│   ├── _default/
-│   │   └── baseof.html     # 基礎佈局 (Header, Footer)
-│   └── index.html          # 首頁專用模板
-├── static/                 # [Assets] 靜態資源
-│   ├── css/
-│   │   └── style.css       # 全站樣式表
-│   └── images/             # 圖片檔案
-├── .github/
-│   └── workflows/
-│       └── hugo.yaml       # GitHub Actions 自動部署腳本
-└── hugo.toml               # [Config] 網站核心設定
-```
+### 設計與使用者體驗
+- [x] **現代化簡約設計**: 乾淨、專注於內容的視覺風格。
+- [x] **響應式網頁設計 (RWD)**: 自動適應桌面、平板與手機螢幕。
+- [x] **深色/淺色模式切換**: 頂部導覽列提供一鍵切換主題功能。
+- [x] **回到頂部按鈕**: 方便使用者快速返回頁面頂端。
+- [x] **全局側邊欄**: 在網站左側提供額外的導覽區塊。
 
-## 🚀 快速開始
+### 首頁 (Portfolio)
+- [x] **個人簡介**: 包含作者名稱、簡介與社群連結。
+- [x] **技能展示**: 以標籤形式展示專業技能。
+- [x] **作品集輪播**: 使用 CSS Scroll Snap 實現的互動式卡片輪播，展示個人專案。
 
-### 前置需求
-請確保您的電腦已安裝 Hugo (建議安裝 Extended 版本)。
+### 部落格 (Blog)
+- [x] **即時全文搜尋**:
+    - 支援關鍵字搜尋文章**標題**、**內文**與**標籤**。
+    - 使用 JavaScript 與預先生成的 `index.json` 實現，無需後端伺服器。
+- [x] **文章分頁**: 部落格列表會自動將文章分頁，提升載入效能。
+- [x] **標籤分類系統 (Taxonomy)**:
+    - 每篇文章都可以加上多個標籤。
+    - 側邊欄提供**熱門標籤雲**，按文章數量排序顯示所有標籤。
+    - 點擊標籤可進入該標籤的專屬列表頁，瀏覽所有相關主題的文章。
+- [x] **上一篇/下一篇導覽**: 在文章頁尾提供卡片式導覽，方便讀者連續閱讀。
+- [x] **Markdown 內容支援**: 支援標準 Markdown 語法，並對圖片、引言、連結等元素進行了樣式優化。
+- [x] **程式碼語法高亮**: 自動為文章中的程式碼區塊提供專業的語法高亮效果。
 
-### 本地開發
-1.  **啟動伺服器**
+---
+
+## 🛠️ 技術棧 (Technology Stack)
+
+- **靜態網站生成器**: Hugo
+- **前端**: HTML5, CSS3 (Flexbox, Grid, CSS Variables), Vanilla JavaScript (ES6+)
+
+---
+
+## 🚀 本地端運行 (Local Setup)
+
+1.  確保您已安裝 Hugo。
+2.  將此專案複製到您的本地電腦：
+    ```bash
+    git clone https://github.com/cplus-hub/CplusHouse.git
+    ```
+3.  進入專案目錄：
+    ```bash
+    cd CplusHouse
+    ```
+4.  啟動 Hugo 本地伺服器：
     ```bash
     hugo server
     ```
+5.  在瀏覽器中開啟 `http://localhost:1313/` 即可看到網站。
 
-2.  **預覽網站**
-    打開瀏覽器訪問 `http://localhost:1313`。
+---
 
-## ⚙️ 網站設定
+## 📝 未來計畫 (To-Do)
 
-所有個人資訊與作品資料皆可在 `hugo.toml` 中進行設定，無需修改 HTML。
-
-### 修改個人資訊
-```toml
-[params]
-  author = "您的名字"
-  bio = "您的個人簡介..."
-  github = "https://github.com/..."
-  email = "mailto:..."
-```
-
-### 新增作品
-在 `hugo.toml` 的 `[[params.projects]]` 區塊中新增：
-```toml
-[[params.projects]]
-  title = "專案名稱"
-  description = "專案描述"
-  image = "/images/your-image.jpg" # 請將圖片放入 static/images/
-  link = "專案連結"
-```
-
-## 📦 部署至 GitHub Pages
-
-本專案已設定好 GitHub Actions，部署流程完全自動化。
-
-1.  **修改 `hugo.toml`**：
-    將 `baseURL` 修改為您 GitHub Pages 的網址：
-    ```toml
-    baseURL = 'https://您的帳號.github.io/專案名稱/'
-    ```
-
-2.  **推送到 GitHub**：
-    ```bash
-    git add .
-    git commit -m "Update site content"
-    git push origin main
-    ```
-
-3.  **設定 GitHub Pages**：
-    *   進入 GitHub Repository 的 **Settings** > **Pages**。
-    *   在 **Build and deployment** > **Source** 選擇 **GitHub Actions**。
-
-等待約 1 分鐘，您的網站就會自動上線！
+- [ ] 在搜尋結果中高亮顯示符合的關鍵字。
+- [ ] 增加聯絡表單功能。
+- [ ] 進行基礎的 SEO (搜尋引擎優化) 設定。

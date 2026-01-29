@@ -1,0 +1,15 @@
+<aside class="sidebar">
+    <div class="sidebar-widget">
+        <h3 class="widget-title">熱門標籤</h3>
+        <div class="tag-cloud">
+            {{ $tags := .Site.Taxonomies.tags.ByCount }}
+            {{ range $tags }}
+            <a href="{{ .Page.RelPermalink }}" class="tag-cloud-item">
+                {{ .Page.Title }}
+                <span class="tag-cloud-count">{{ .Count }}</span>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    <!-- 未來可以在此處增加其他側邊欄小工具，例如「最新文章」 -->
+</aside>
