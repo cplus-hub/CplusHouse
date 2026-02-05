@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="container">
+    <h1 class="page-title">#{{ .Title }} - 時間軸紀錄</h1>
+    
+    <div class="timeline">
+        {{ range .Paginator.Pages }}
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">{{ .Date.Format "2006-01-02" }}</span>
+                <h3 class="timeline-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                
+                {{/* 邏輯：嘗試從 tag_notes 中抓取對應此標籤的備註 */}}
+                {{ $tagNote := "" }}
+                {{ if .Params.tag_notes }}
+                    {{ $tagNote = index .Params.tag_notes $.Title }}
+                {{ end }}
+
+                {{ if $tagNote }}
+                    <div class="timeline-note">
+                        <strong>{{ $tagNote }}</strong> 
+                    </div>
+                {{ else }}
+                    <div class="timeline-note text-muted">
+                        {{ .Summary | truncate 60 }}
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+
+    {{/* 分頁導覽列 */}}
+    {{ if gt .Paginator.TotalPages 1 }}
+    <ul class="pagination">
+        {{ if .Paginator.HasPrev }}<li><a href="{{ .Paginator.Prev.URL }}">上一頁</a></li>{{ end }}
+        <li><span>第 {{ .Paginator.PageNumber }} 頁 / 共 {{ .Paginator.TotalPages }} 頁</span></li>
+        {{ if .Paginator.HasNext }}<li><a href="{{ .Paginator.Next.URL }}">下一頁</a></li>{{ end }}
+    </ul>
+    {{ end }}
+</div>
+{{ end }}
