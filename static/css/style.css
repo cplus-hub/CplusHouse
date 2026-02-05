@@ -672,3 +672,86 @@ body.dark-mode .post-content .highlight {
     background-color: rgba(255,255,255,0.2);
     color: var(--card-bg);
 }
+
+/* 時間軸樣式 (Timeline) */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+/* 垂直連接線 */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 19px; /* 線條位置 */
+    width: 2px;
+    background: var(--card-border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 50px; /* 留出左側空間給線條和圓點 */
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 10px; /* 圓點中心對齊線條 (19px + 1px線寬 - 10px半徑) */
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 4px solid var(--bg-color); /* 使用背景色做邊框，製造間隔感 */
+    box-shadow: 0 0 0 1px var(--primary); /* 外圈裝飾 */
+    z-index: 1;
+}
+
+.timeline-content {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.timeline-content:hover {
+    transform: translateX(5px);
+}
+
+.timeline-date {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+}
+
+.timeline-title a {
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.timeline-title a:hover {
+    color: var(--primary);
+}
+
+.timeline-note {
+    color: var(--text-main);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.timeline-note.text-muted {
+    color: var(--text-muted);
+    font-style: italic;
+}
