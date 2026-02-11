@@ -17,20 +17,37 @@
     </section>
 
     <!-- 作品集區塊 (卡片輪播) -->
-    {{ if .Site.Params.projects }}
-    <section class="projects">
+    {{ $projects := where .Site.RegularPages "Section" "projects" }}
+    {{ if or $projects .Site.Params.projects }}
+    <section class="projects" id="projects">
         <h2>專案內容</h2>
         <div class="carousel-container">
-            {{ range .Site.Params.projects }}
+            {{/* 優先顯示 content/projects 下的專案 */}}
+            {{ range $projects }}
             <div class="project-card">
-                <img src="{{ .image }}" alt="{{ .title }}" class="project-img">
-                <div class="project-title-bar">{{ .title }}</div>
+                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="project-img">
+                <div class="project-title-bar">{{ .Title }}</div>
                 <div class="project-overlay">
-                    <h3>{{ .title }}</h3>
-                    <p>{{ .description }}</p>
-                    <a href="{{ .link }}" class="project-link">查看詳情</a>
+                    <h3>{{ .Title }}</h3>
+                    <p>{{ .Description }}</p>
+                    <a href="{{ .RelPermalink }}" class="project-link">查看詳情</a>
                 </div>
             </div>
+            {{ end }}
+            
+            {{/* 如果沒有 content 專案，則顯示 config 中的 (相容舊設定) */}}
+            {{ if not $projects }}
+                {{ range .Site.Params.projects }}
+                <div class="project-card">
+                    <img src="{{ .image | relURL }}" alt="{{ .title }}" class="project-img">
+                    <div class="project-title-bar">{{ .title }}</div>
+                    <div class="project-overlay">
+                        <h3>{{ .title }}</h3>
+                        <p>{{ .description }}</p>
+                        <a href="{{ .link }}" class="project-link">查看詳情</a>
+                    </div>
+                </div>
+                {{ end }}
             {{ end }}
         </div>
     </section>

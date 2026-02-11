@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="container">
+    <h1 class="page-title">作品集</h1>
+    
+    <div class="project-grid">
+        {{ range .Paginator.Pages }}
+        <div class="project-card">
+            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="project-img">
+            <div class="project-title-bar">{{ .Title }}</div>
+            <div class="project-overlay">
+                <h3>{{ .Title }}</h3>
+                <p>{{ .Description }}</p>
+                <a href="{{ .RelPermalink }}" class="project-link">查看詳情</a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+
+    {{/* 分頁導覽列 */}}
+    {{ if gt .Paginator.TotalPages 1 }}
+    <ul class="pagination">
+        {{ if .Paginator.HasPrev }}<li><a href="{{ .Paginator.Prev.URL }}">上一頁</a></li>{{ end }}
+        <li><span>第 {{ .Paginator.PageNumber }} 頁 / 共 {{ .Paginator.TotalPages }} 頁</span></li>
+        {{ if .Paginator.HasNext }}<li><a href="{{ .Paginator.Next.URL }}">下一頁</a></li>{{ end }}
+    </ul>
+    {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,52 @@
+{{ define "main" }}
+<div class="container">
+    <article class="project-post">
+        <header class="project-header">
+            <h1 class="project-title">{{ .Title }}</h1>
+            <div class="project-meta">
+                {{ if .Params.dev_time }}
+                <div class="meta-item">
+                    <strong>開發時間：</strong> {{ .Params.dev_time }}
+                </div>
+                {{ end }}
+                {{ if .Params.tech_stack }}
+                <div class="meta-item">
+                    <strong>技術堆疊：</strong> 
+                    {{ range .Params.tech_stack }}
+                    <span class="tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </header>
+
+        {{ if .Params.image }}
+        <div class="project-featured-image">
+            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+        </div>
+        {{ end }}
+
+        <div class="project-content">
+            <h2>專案介紹</h2>
+            {{ .Content }}
+        </div>
+
+        {{ if .Params.features }}
+        <div class="project-features">
+            <h2>功能細項</h2>
+            <ul class="feature-list">
+                {{ range .Params.features }}
+                <li>
+                    <strong>{{ .title | default .Title }}</strong>: {{ .description | default .Description }}
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+        
+        <div class="project-footer">
+            <a href="{{ "/CplusHouse/projects" | relURL }}" class="btn-back">← 返回作品列表</a>
+        </div>
+    </article>
+</div>
+{{ end }}
