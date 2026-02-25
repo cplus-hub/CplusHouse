@@ -40,7 +40,19 @@
 
 ---
 
-## 🛠️ 技術棧 (Technology Stack)
+## 📂 專案結構 (Project Structure)
+
+主要文章存放於 `content/blog/` 目錄下，分為兩大類：
+
+*   **生活日記 (`content/blog/diary/`)**：
+    *   採用 `年份/月份` 的樹狀結構管理。
+    *   側邊欄會自動生成可展開/收合的樹狀選單 (使用 HTML `<details>` 標籤實作，無須 JavaScript)。
+*   **技術筆記 (`content/blog/tech/`)**：
+    *   存放開發相關的技術文章。
+
+---
+
+## ️ 技術棧 (Technology Stack)
 
 - **靜態網站生成器**: Hugo
 - **前端**: HTML5, CSS3 (Flexbox, Grid, CSS Variables), Vanilla JavaScript (ES6+)
@@ -59,10 +71,28 @@
     cd CplusHouse
     ```
 4.  啟動 Hugo 本地伺服器：
+    > **注意**：由於日記文章可能包含未來的日期（例如預寫的 2026 年日記），請務必使用 `-F` 參數來啟動預覽伺服器，否則未來的文章與對應的資料夾結構將不會顯示。
     ```bash
-    hugo server
+    hugo server -F
     ```
 5.  在瀏覽器中開啟 `http://localhost:1313/` 即可看到網站。
+
+---
+
+## 📝 新增日記步驟 (Adding Diary Entries)
+
+為了讓樹狀選單正常運作，請遵循以下結構新增日記：
+
+1.  進入 `content/blog/diary/`。
+2.  建立對應的 **年份** 資料夾（例如 `2026`）。
+3.  建立對應的 **月份** 資料夾（例如 `02`）。
+4.  **重要**：在月份資料夾內建立 `_index.md` 檔案，設定顯示標題（避免顯示重複的路徑）：
+    ```yaml
+    ---
+    title: "02"
+    ---
+    ```
+5.  新增您的 Markdown 文章（例如 `day20260225.md`）。
 
 ---
 

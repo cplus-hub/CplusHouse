@@ -1,0 +1,45 @@
+<div class="sidebar-widget">
+    <h3 class="widget-title">日記歸檔</h3>
+    <ul class="tree-list">
+            {{/* 取得 diary section */}}
+            {{ $diary := site.GetPage "blog/diary" }}
+            
+            {{/* 檢查 diary 是否存在且有子區塊 */}}
+            {{ if $diary }}
+                {{ if gt (len $diary.Sections) 0 }}
+                    {{/* 遍歷年份 (Sections)，按標題反向排序 (最新的年份在上面) */}}
+                    {{ range $diary.Sections.ByTitle.Reverse }}
+                    <li class="tree-year">
+                        <details open>
+                            <summary class="folder-label" style="cursor: pointer;">📂 {{ .Title }}</summary>
+                            <ul>
+                                {{/* 遍歷月份 (Sub-sections)，按標題排序 */}}
+                                {{ range .Sections.ByTitle }}
+                                <li class="tree-month">
+                                    <details open>
+                                        <summary class="folder-label" style="cursor: pointer;">📁 {{ .Title }}</summary>
+                                        <ul>
+                                            {{/* 遍歷文章 (Pages) */}}
+                                            {{ range .Pages.ByDate }}
+                                            <li class="tree-post">
+                                                <a href="{{ .RelPermalink }}">📄 {{ .Title }}</a>
+                                            </li>
+                                            {{ else }}
+                                                <li style="color: #999; font-size: 0.8em; padding-left: 10px;">(無文章或日期為未來)</li>
+                                            {{ end }}
+                                        </ul>
+                                    </details>
+                                </li>
+                                {{ end }}
+                            </ul>
+                        </details>
+                    </li>
+                    {{ end }}
+                {{ else }}
+                    <li>沒有可顯示的年份資料夾。<br></li>
+                {{ end }}
+            {{ else }}
+                <li>找不到日記區塊</li>
+            {{ end }}
+    </ul>
+</div>

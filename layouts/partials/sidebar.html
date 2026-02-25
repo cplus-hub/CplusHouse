@@ -1,4 +1,16 @@
 <aside class="sidebar">
+    <!-- 技能區塊 -->
+    {{ if site.Params.skills }}
+    <div class="sidebar-widget">
+        <h3 class="widget-title">技術能力</h3>
+        <ul class="skill-list">
+            {{ range site.Params.skills }}
+            <li>{{ .name }}</li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+
     <div class="sidebar-widget">
         <h3 class="widget-title">熱門標籤</h3>
         <div class="tag-cloud">
@@ -12,15 +24,5 @@
         </div>
     </div>
 
-    <!-- 技能區塊 -->
-    {{ if site.Params.skills }}
-    <div class="sidebar-widget">
-        <h3 class="widget-title">技術能力</h3>
-        <ul class="skill-list">
-            {{ range site.Params.skills }}
-            <li>{{ .name }}</li>
-            {{ end }}
-        </ul>
-    </div>
-    {{ end }}
+    {{ partial "widgets/diary_tree.html" . }}
 </aside>

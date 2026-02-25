@@ -858,3 +858,35 @@ body.dark-mode .post-content .highlight {
     gap: 2rem;
     margin-bottom: 2rem;
 }
+
+/* 樹狀結構樣式 */
+.tree-list, .tree-list ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.tree-list li {
+    position: relative;
+    margin-top: 5px;
+}
+
+/* 連接線效果 (選用) */
+.tree-list ul {
+    border-left: 1px solid #ddd;
+}
+
+.folder-label {
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+}
+
+.tree-post a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.tree-post a:hover {
+    color: #007bff;
+}
