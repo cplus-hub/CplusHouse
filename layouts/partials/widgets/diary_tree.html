@@ -10,13 +10,13 @@
                     {{/* 遍歷年份 (Sections)，按標題反向排序 (最新的年份在上面) */}}
                     {{ range $diary.Sections.ByTitle.Reverse }}
                     <li class="tree-year">
-                        <details open>
+                        <details>
                             <summary class="folder-label" style="cursor: pointer;">📂 {{ .Title }}</summary>
                             <ul>
                                 {{/* 遍歷月份 (Sub-sections)，按標題排序 */}}
                                 {{ range .Sections.ByTitle }}
                                 <li class="tree-month">
-                                    <details open>
+                                    <details>
                                         <summary class="folder-label" style="cursor: pointer;">📁 {{ .Title }}</summary>
                                         <ul>
                                             {{/* 遍歷文章 (Pages) */}}
