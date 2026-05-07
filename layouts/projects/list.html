@@ -4,13 +4,16 @@
     
     <div class="project-grid">
         {{ range .Paginator.Pages }}
+        {{ $project := . }}
         <div class="project-card">
-            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="project-img">
-            <div class="project-title-bar">{{ .Title }}</div>
+            {{ with $project.Params.image }}
+            <img src="{{ . | relURL }}" alt="{{ $project.Title }}" class="project-img">
+            {{ end }}
+            <div class="project-title-bar">{{ $project.Title }}</div>
             <div class="project-overlay">
-                <h3>{{ .Title }}</h3>
-                <p>{{ .Description }}</p>
-                <a href="{{ .RelPermalink }}" class="project-link">查看詳情</a>
+                <h3>{{ $project.Title }}</h3>
+                <p>{{ $project.Description }}</p>
+                <a href="{{ $project.RelPermalink }}" class="project-link">查看詳情</a>
             </div>
         </div>
         {{ end }}

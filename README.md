@@ -40,6 +40,7 @@
 ```text
 .
 ├── .github/workflows/hugo.yaml   # GitHub Pages 自動部署流程
+├── archetypes/                    # Hugo 新增內容樣板
 ├── content/                      # Markdown 內容
 │   ├── _index.md                 # 首頁內容
 │   ├── blog/                     # 部落格根目錄
@@ -121,12 +122,30 @@ hugo -F --minify
 
 ---
 
+## 新增一般部落格文章
+
+一般部落格文章放在 `content/blog/`，建議使用 Hugo archetype 產生固定 front matter：
+
+```bash
+hugo new content blog/my-post.md -k blog
+```
+
+產生後請補上 `summary`、`tags` 與內文。
+
+---
+
 ## 新增日記
 
 日記路徑採 `年份/月份` 結構：
 
 ```text
 content/blog/diary/2026/05/day20260507.md
+```
+
+建議使用 Hugo archetype 產生日記文章：
+
+```bash
+hugo new content blog/diary/2026/05/day20260507.md -k diary
 ```
 
 月份資料夾需包含 `_index.md`：
@@ -160,6 +179,12 @@ tag_notes:
 content/blog/tech/
 ```
 
+建議使用 Hugo archetype 產生技術筆記：
+
+```bash
+hugo new content blog/tech/my-note.md -k tech
+```
+
 技術筆記文章 front matter 範例：
 
 ```yaml
@@ -175,9 +200,46 @@ tags: ["技術筆記"]
 
 ---
 
+## 新增作品集
+
+正式作品資料只維護在 `content/projects/`，不要再新增到 `hugo.toml` 的 `params.projects`。
+
+作品集內容放在：
+
+```text
+content/projects/
+```
+
+建議使用 Hugo archetype 產生作品頁：
+
+```bash
+hugo new content projects/my-project.md -k projects
+```
+
+產生後請補上 `description`、`image`、`dev_time`、`tech_stack` 與 `features`，讓作品集列表與詳細頁可以讀取完整資料。
+
+作品頁 front matter 範例：
+
+```yaml
+---
+title: "作品名稱"
+date: 2026-05-07
+description: "作品摘要"
+image: "images/my-project.png"
+dev_time: "2026/01 - 2026/03"
+tech_stack: ["PHP", "MySQL", "JavaScript"]
+features:
+  - title: "主要功能"
+    description: "功能說明"
+---
+```
+
+---
+
 ## 圖片路徑約定
 
 - 放在 `static/images/` 的圖片會部署為網站的 `/images/...` 資源。
+- 作品集 front matter 的 `image` 建議使用 `images/檔名`，例如 `images/my-project.png`，讓 Hugo 透過 `relURL` 產生正確站內路徑。
 - 目前既有 Markdown 文章多使用 GitHub Pages 專案路徑，例如 `/CplusHouse/images/nagisa.png`，以維持線上站點圖片可用。
 - Layout 與設定檔中的站內連結應使用 Hugo 的 `relURL` 產生，不應硬寫 `/CplusHouse`。
 - 未來若要重構文章圖片路徑，建議改用 Hugo shortcode 或一致的資源引用方式，並逐篇抽查。
@@ -187,5 +249,4 @@ tags: ["技術筆記"]
 ## 未來計畫
 
 - [ ] 增加聯絡表單功能。
-- [ ] 進行基礎 SEO 設定。
 - [ ] 將文章圖片路徑逐步改成更可攜的 Hugo 資源引用方式。

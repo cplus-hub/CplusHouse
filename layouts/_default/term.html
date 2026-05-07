@@ -17,8 +17,9 @@
                 {{ end }}
 
                 {{ if $tagNote }}
-                    <div class="timeline-note">
-                        <strong>{{ $tagNote }}</strong> 
+                    {{ $tagNoteText := printf "%v" $tagNote }}
+                    <div class="timeline-note has-full-note" data-full-note="{{ $tagNoteText }}">
+                        <strong class="timeline-note-summary" tabindex="0">{{ $tagNoteText | truncate 60 }}</strong>
                     </div>
                 {{ else }}
                     <div class="timeline-note text-muted">
