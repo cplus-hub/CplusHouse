@@ -544,6 +544,18 @@ footer {
     box-sizing: border-box;
 }
 
+.search-highlight {
+    background: #fde68a;
+    color: #1f2937;
+    padding: 0 0.15em;
+    border-radius: 0.2rem;
+}
+
+body.dark-mode .search-highlight {
+    background: #facc15;
+    color: #111827;
+}
+
 /* 程式碼高亮區塊 (Hugo Chroma) */
 .post-content .highlight {
     background: #282c34;

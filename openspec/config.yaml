@@ -1,0 +1,86 @@
+schema: spec-driven
+
+context: |
+  專案名稱: CPlus House
+  專案類型: 使用 Hugo 建立的個人作品集與部落格靜態網站。
+  主要語言與技術:
+    - Hugo 靜態網站生成器
+    - HTML5
+    - CSS3，包含 CSS Variables、Flexbox、Grid、RWD、深色模式
+    - Vanilla JavaScript，用於前端即時搜尋與簡單互動
+    - Markdown 內容管理
+
+  專案架構:
+    - hugo.toml: Hugo 主要設定，包含 baseURL、分頁、首頁輸出格式與 params。
+    - content/_index.md: 首頁自訂內容。
+    - content/blog: 部落格內容根目錄。
+    - content/blog/diary: 日記文章根目錄，採年份與月份樹狀結構，例如 content/blog/diary/2026/05。
+    - content/projects: 作品集詳細頁內容，使用 Markdown 與 front matter 維護。
+    - layouts/_default/baseof.html: 全站 HTML 外框，包含 header、sidebar、footer、回到頂部與主題切換。
+    - layouts/index.html: 首頁版型，顯示個人簡介、首頁 Markdown、作品集與最新文章。
+    - layouts/_default/list.html: 一般列表頁與部落格搜尋入口。
+    - layouts/_default/single.html: 一般文章頁。
+    - layouts/_default/term.html: 標籤分類頁，以時間軸呈現文章。
+    - layouts/_default/index.json: 產生站內搜尋索引，供 static/js/search.js 載入。
+    - layouts/projects: 作品集列表與作品詳細頁版型。
+    - layouts/partials: header、footer、sidebar 與日記樹狀歸檔 partial。
+    - static/css/style.css: 全站樣式、RWD、深淺色模式、作品卡片、時間軸、搜尋與文章樣式。
+    - static/js/search.js: 前端搜尋邏輯，會讀取 index.json 並比對標題、內文與標籤。
+    - static/images: 文章與作品集圖片資源。
+    - .github/workflows/hugo.yaml: GitHub Pages 自動部署流程。
+    - public: Hugo 建置輸出目錄，已由 .gitignore 排除，不應手動維護。
+
+  目前核心功能:
+    - 個人首頁與作品集展示。
+    - Markdown 部落格與日記內容管理。
+    - 日記依年份與月份歸檔，側邊欄以樹狀選單呈現。
+    - 標籤雲與標籤時間軸頁。
+    - 前端即時全文搜尋，搜尋來源為 Hugo 產生的 index.json。
+    - 深色與淺色模式切換。
+    - 回到頂部按鈕。
+    - GitHub Pages 自動部署。
+
+  本地執行方式:
+    - 確認已安裝 Hugo。
+    - 本地預覽指令: hugo server -F
+    - 本地預覽網址: http://localhost:1313/
+    - 正式建置指令: hugo -F --minify
+    - 使用 -F 是必要慣例，因為日記內容可能包含未來日期；未加 -F 時，Hugo 會隱藏未來日期文章與相關列表。
+
+  部署方式:
+    - push 到 main 分支後觸發 .github/workflows/hugo.yaml。
+    - GitHub Actions 會安裝 Hugo、建置 public 內容，並部署到 GitHub Pages。
+    - 線上網址目前為 https://cplus-hub.github.io/CplusHouse。
+
+  已知維護注意事項:
+    - 本機 Hugo 版本曾確認為 0.154.5，GitHub Actions 目前指定 0.128.0；後續應統一版本以降低環境差異。
+    - hugo.toml 的 pagerSize 為 10，但註解寫每頁 5 篇文章；後續應修正註解或設定。
+    - README 提到 content/blog/tech，但目前尚未建立該目錄；後續需補齊或更新文件。
+    - header、文章圖片與部分返回連結有硬寫 /CplusHouse 路徑；若 baseURL 或部署路徑改變，應改用 Hugo relURL 或更一致的資源引用方式。
+    - hugo.toml 中 project2.jpg 與 project3.jpg 目前沒有對應圖片；若改用 content/projects 維護作品集，可清理 params.projects 備援資料。
+
+  未來可執行規劃:
+    - 短期: 統一路徑、Hugo 版本、分頁註解與 README 現況。
+    - 短期: 為搜尋結果加入關鍵字高亮，並改善搜尋摘要呈現。
+    - 短期: 建立或修正技術筆記內容分類，例如 content/blog/tech。
+    - 中期: 補齊 SEO 基礎設定，包括 description、Open Graph、canonical、favicon、robots 與文章圖片 metadata。
+    - 中期: 將作品集資料集中改由 content/projects 維護，讓每個專案具備完整 Markdown、圖片、技術堆疊與功能列表。
+    - 中期: 建立日記或文章 archetype，固定 front matter 欄位如 title、date、tags、tag_notes。
+    - 長期: 增加靜態網站可用的聯絡表單整合，例如 Formspree、Google Forms 或 GitHub Issues workflow。
+    - 長期: 建立內容與部署檢查流程，至少在變更前後執行 Hugo build 驗證。
+    - 長期: 優化手機版側邊欄、作品卡片觸控體驗、圖片壓縮與載入效能。
+
+rules:
+  proposal:
+    - 使用繁體中文撰寫。
+    - 明確標示變更目的、範圍、非目標與影響頁面。
+    - 若變更會影響部署路徑、搜尋索引或內容 URL，需列為風險。
+  design:
+    - 優先沿用 Hugo、現有 layouts、partials、static/css/style.css 與 static/js/search.js 的模式。
+    - 避免引入新前端框架，除非 proposal 已明確說明理由。
+    - 說明內容來源、版型責任邊界與產出的 URL 或檔案。
+  tasks:
+    - 使用繁體中文撰寫。
+    - 任務需拆成可驗證的小步驟。
+    - 任何實作變更完成後，至少執行 hugo -F --destination build-check 或等效建置驗證。
+    - 驗證用輸出目錄不應提交到版本控制。

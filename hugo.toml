@@ -4,7 +4,7 @@ title = 'CPlus House'
 theme = [] # 暫時使用自定義 Layout，不依賴外部主題
 
 [pagination]
-  pagerSize = 10 # 設定每頁顯示 5 篇文章
+  pagerSize = 10 # 設定每頁顯示 10 篇文章
 
 [outputs]
   # 讓首頁除了生成 HTML 外，也生成 JSON (供搜尋使用)
@@ -35,10 +35,10 @@ theme = [] # 暫時使用自定義 Layout，不依賴外部主題
   [[params.projects]]
     title = "社區管理專案"
     description = "搭配Cursor 與PHP 進行協同開發合作，提升團隊開發效率。"
-    image = "/images/project2.jpg" # 改為本地路徑
+    image = "images/care.png" # 備援範例圖，正式專案請改為對應圖片
     link = "#"
   [[params.projects]]
     title = "客製化購課平台"
     description = "使用PHP 構建的動態網站主題，支援金流與第三方登入。"
-    image = "/images/project3.jpg" # 改為本地路徑
+    image = "images/care.png" # 備援範例圖，正式專案請改為對應圖片
     link = "#"
